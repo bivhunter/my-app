@@ -1,0 +1,37 @@
+<div class="container">
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Sign In</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="signInForm" *ngIf="signInForm">
+        <mat-form-field appearance="outline" color="primary"> 
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username">
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button 
+              type="submit"
+              (click)="signIn()"
+              [disabled]="signInForm.invalid"
+              color="primary">
+        Sign In
+      </button>
+    </mat-card-actions>
+    <mat-card-footer *ngIf="error || token">
+      <div class="error" *ngIf="error">
+        {{ error }}
+      </div>
+      <div class="token" *ngIf="token">
+        {{ token }}
+      </div>
+    </mat-card-footer>
+  </mat-card>
+</div>

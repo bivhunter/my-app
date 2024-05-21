@@ -1,0 +1,30 @@
+name: Deploy
+
+on: [workflow_dispatch]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/checkout@v1
+      - name: Use Node.js 18.19.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.19.0
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: 'npm run build'
+        env:
+          HTTPS: 'true'
+          # REACT_APP_BASE_URL: ${{ secrets.BASE_URL }}
+          # PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

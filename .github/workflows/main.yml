@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: ng build --base-href ${{ secrets.PUBLIC_URL }}
+        run: npm run github-build
         env:
           HTTPS: 'true'
           BASE_URL: ${{ secrets.BASE_URL }}

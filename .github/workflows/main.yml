@@ -3,12 +3,12 @@ name: Deploy
 on: [workflow_dispatch]
 env: 
   PUBLIC_URL: ${{ github.ref == 'refs/heads/main' 
-    && format('{0}/{1}', secrets.PUBLIC_URL, 'prod')
-    || format('{0}/{1}', secrets.PUBLIC_URL, 'dev') }}
+    && format('{0}{1}', secrets.PUBLIC_URL, 'prod/')
+    || format('{0}/{1}', secrets.PUBLIC_URL, 'dev/') }}
 
   BASE_URL: ${{ github.ref == 'refs/heads/main' 
-    && format('{0}/{1}', secrets.BASE_URL, 'prod')
-    || format('{0}/{1}', secrets.BASE_URL, 'dev') }}
+    && format('{0}{1}', secrets.BASE_URL, 'prod/')
+    || format('{0}{1}', secrets.BASE_URL, 'dev/') }}
   
 jobs:
   deploy:

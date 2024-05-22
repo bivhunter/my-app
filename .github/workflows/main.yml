@@ -1,7 +1,15 @@
 name: Deploy
 
 on: [workflow_dispatch]
+env: 
+  PUBLIC_URL: ${{ github.ref == 'refs/heads/main' 
+    && format('{0}/{1}', secrets.PUBLIC_URL, prod)
+    || format('{0}/{1}', secrets.PUBLIC_URL, dev) }}
 
+  BASE_URL: ${{ github.ref == 'refs/heads/main' 
+    && format('{0}/{1}', secrets.BASE_URL, prod)
+    || format('{0}/{1}', secrets.BASE_URL, dev) }}
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -18,10 +26,10 @@ jobs:
         run: npm install
      
       - name: Build
-        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ format('{0}/{1}', secrets.PUBLIC_URL, dev ) }}
+        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ env.PUBLIC_URL ) }}
         env:
           HTTPS: 'true'
-          BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL: ${{ env.BASE_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

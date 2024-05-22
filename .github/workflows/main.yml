@@ -16,15 +16,9 @@ jobs:
           node-version: 18.19.0
       - name: Install dependencies
         run: npm install
-      - name: Combine strings
-        uses: michpohl/action-concatenate-strings@v1
-        with:
-          first: ${{ secrets.PUBLIC_URL }}
-          second: ${GITHUB_REF##*/}
-          separator: '/'
-          output-var-name: 'DEPLOY_URL'
+     
       - name: Build
-        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${DEPLOY_URL}
+        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ format('{0}/{1}', secrets.PUBLIC_URL, ${GITHUB_REF##*/} }}
         env:
           HTTPS: 'true'
           BASE_URL: ${{ secrets.BASE_URL }}

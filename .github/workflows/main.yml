@@ -9,17 +9,17 @@ jobs:
       - name: Git Checkout
         uses: actions/checkout@v2
 
-      - uses: actions/checkout@v1
-      - name: Use Node.js 18.19.0
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18.19.0
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: 'npm run build'
-        env:
-          HTTPS: 'true'
+      # - uses: actions/checkout@v1
+      # - name: Use Node.js 18.19.0
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: 18.19.0
+      # - name: Install dependencies
+      #   run: npm install
+      # - name: Build
+      #   run: 'npm run build'
+      #   env:
+      #     HTTPS: 'true'
           # REACT_APP_BASE_URL: ${{ secrets.BASE_URL }}
           # PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
 

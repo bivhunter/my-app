@@ -18,7 +18,7 @@ jobs:
         run: npm install
      
       - name: Build
-        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ format('{0}/{1}', secrets.PUBLIC_URL, ${GITHUB_REF##*/}) }}
+        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ format('{0}/{1}', secrets.PUBLIC_URL, GITHUB_REF##*/ ) }}
         env:
           HTTPS: 'true'
           BASE_URL: ${{ secrets.BASE_URL }}

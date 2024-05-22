@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: node ./node_modules/@angular/cli/bin/ng build --base-href {{ PUBLIC_URL }}
+        run: node ./node_modules/@angular/cli/bin/ng build --base-href ${{ secrets.PUBLIC_URL }}
         env:
           HTTPS: 'true'
           BASE_URL: ${{ secrets.BASE_URL }}

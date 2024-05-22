@@ -17,10 +17,10 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build
-        run: npm run build --base-href=${{ secrets.PUBLIC_URL }}
+        run: ng build --base-href ${{ secrets.PUBLIC_URL }}
         env:
           HTTPS: 'true'
-          REACT_APP_BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL: ${{ secrets.BASE_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

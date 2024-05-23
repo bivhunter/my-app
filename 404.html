@@ -3,6 +3,7 @@
     <title>Page Not Found</title>
     <script>
       // Redirect to index.html for client-side routing
+      console.log('location', window.location);
       const path = window.location.pathname.replace(/\/$/, '');
       window.location.href = `/${path}/`;
     </script>

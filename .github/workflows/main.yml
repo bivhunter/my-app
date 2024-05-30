@@ -26,7 +26,7 @@ jobs:
         run: npm install
      
       - name: Build
-        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ env.PUBLIC_URL }} --base-href https://bivhunter.github.io/my-app/dev --configuration ${{ env.STAGE }}
+        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ env.PUBLIC_URL }} --base-href ${{ env.PUBLIC_URL }} --configuration ${{ env.STAGE }}
         env:
           HTTPS: 'true'
 

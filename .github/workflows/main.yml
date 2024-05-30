@@ -6,9 +6,9 @@ env:
     && format('{0}{1}', secrets.PUBLIC_URL, 'prod/')
     || format('{0}/{1}', secrets.PUBLIC_URL, 'dev/') }}
 
-  BASE_URL: ${{ github.ref == 'refs/heads/main' 
-    && format('{0}{1}', secrets.BASE_URL, 'prod/')
-    || format('{0}{1}', secrets.BASE_URL, 'dev/') }}
+  STAGE: ${{ github.ref == 'refs/heads/main' 
+    && 'production'
+    || 'development' }}
   
 jobs:
   deploy:
@@ -26,10 +26,9 @@ jobs:
         run: npm install
      
       - name: Build
-        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ env.PUBLIC_URL }} --base-href https://bivhunter.github.io/my-app/dev
+        run: node ./node_modules/@angular/cli/bin/ng build --deploy-url ${{ env.PUBLIC_URL }} --base-href https://bivhunter.github.io/my-app/dev --configuration {{env.STAGE}}
         env:
           HTTPS: 'true'
-          BASE_URL: ${{ env.BASE_URL }}
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
